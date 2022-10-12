@@ -233,12 +233,7 @@ def open_contact_page():
         email = request.form["email"]
         phonenum =  request.form["phonenum"]
         message = request.form["message"]
-        with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
-            connection.starttls()
-            connection.login(user=my_email, password=password)
-            connection.sendmail(from_addr=my_email,
-                                to_addrs=receiver_email,
-                                msg=f"HEYYY!!\n\nname:{name}\nemail:{email}\nphonenum:{phonenum}\nmessage:{message}")
+        
 
         return render_template("contact.html", message="Successfully sent your message.",logged_in=current_user.is_authenticated)
     return render_template("contact.html", message="Contact Akash!",logged_in=current_user.is_authenticated)
