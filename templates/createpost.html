@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Post</title>
+        <link rel="icon" href="/static/assets/favicon-32x32.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
+    </head>
+    <body>
+        {% block content %}
+        {% include "header.html" %}
+        {% import 'bootstrap/form.html' as wtf %}
+		{% from 'bootstrap/form.html' import render_form, render_field %}
+        <!-- Page Header -->
+        {%if editer:%}
+            <header class="masthead" style="background-image: url('/static/assets/img/makepost-bg.jpeg')">
+                <div class="overlay"></div>
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>Edit Post</h1>
+                        <span class="subheading">You're going to make a great blog post!</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </header>
+        {%else:%}
+            <header class="masthead" style="background-image: url('/static/assets/img/makepost-bg.jpeg')">
+                <div class="overlay"></div>
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>Create Post</h1>
+                        <span class="subheading">You're going to make a great blog post!</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </header>
+        {%endif%}
+
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {{wtf.render_form(form,button_map={"submit":"btn-dark btn-outline-dark"})}}
+                {{ ckeditor.load() }}
+                {{ ckeditor.config(name='body') }}
+            </div>
+            </div>
+        </div>
+    
+    </body>
+
+{% include "footer.html" %}
+{% endblock %}

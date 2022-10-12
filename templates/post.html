@@ -1,0 +1,81 @@
+{% import 'bootstrap/form.html' as wtf %}
+{% from 'bootstrap/form.html' import render_form, render_field %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Post</title>
+        <link rel="icon" href="/static/assets/favicon-32x32.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <!-- Page Header-->
+            <header class="masthead" style="background-image: url('{{post.img_url}}')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="post-heading">
+                                <h1>{{post["title"]}}</h1>
+                                <h2 class="subheading">{{post["subtitle"]}}</h2>
+                                <span class="meta">
+                                    Posted by
+                                    <a href='{{post["author-instagram"]}}'>{{post["author"]}}</a>
+                                    on {{post["date"]}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                            <p>{{post["body"]|safe}}</p>
+                            <br>
+                    </div>
+                    <div class="clearfix">
+                        <a class="btn btn-primary float-end marginer" href="{{url_for('edit_post',num=post['id'])}}">Edit Post</a>
+                    </div>
+                    
+                    {% for comment in comments: %}
+                        {%if comment.comment_post_id == post["id"]%}
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-4 mx-auto comment">
+                                    <img src="{{ comment.commenter_email | gravatar }}" class="commenterImage"/>
+                                </div>
+                                <div class="col-lg-10 col-sm-8 mx-auto comment dark-container">
+                                    {{comment.text|safe}}
+                                </div>
+                                <div class="col-lg-8 col-md-10 mx-auto comment float-end">
+                                    <span class="date sub-text"><em>-{{comment.commenter_name}}</em></span><a href="{{url_for('delete_comment',num=comment.id)}}">✘</a>
+                                </div>
+                            </div>
+                        {%endif%}
+                    {% endfor %}
+                    </div>
+                {{wtf.render_form(form,novalidate=True, button_map={"submit": "dark btn-outline-light"})}}
+                {{ ckeditor.load() }}
+                {{ ckeditor.config(name='body') }}
+                </div>
+            </div>
+            
+        </article>
+        {% include 'footer.html' %}
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{url_for('static', filename='scripts.js')}}"></script>
+    </body>
+</html>
