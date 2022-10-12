@@ -69,7 +69,7 @@ def admin_only(f):
 #--------------------------------------------------Main Routes------------------------------------------------------
 @app.route("/")
 def home():
-    db.create_all()
+#     db.create_all()
     data=db.session.query(BlogPost).all()
     return render_template("index.html",blog_data=data,logged_in=current_user.is_authenticated)
 
