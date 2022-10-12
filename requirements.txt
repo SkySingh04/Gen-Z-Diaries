@@ -21,3 +21,4 @@ Werkzeug==2.2.2
 WTForms==2.3.3
 email-validator==1.1.2
 python-dotenv==0.21.0
+MarkupSafe==2.1.1
