@@ -167,7 +167,7 @@ def edit_post(num):
             post.body=edit_form.body.data
             db.session.commit()
             url=post.img_url
-            return redirect("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form)
+            return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form)
     else:
         return abort(403)
     return render_template('createpost.html',form=edit_form,editer=True,logged_in=current_user.is_authenticated)
