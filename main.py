@@ -25,10 +25,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 load_dotenv("C:/Users/ACA$H/Desktop/CONFIDENTIAL/EnvironmentVariables/.env")
 #Secret Things 
-my_email=os.getenv("my_email")
-password=os.getenv("password")
-receiver_email=os.getenv("receiver_email")
-app.secret_key = os.getenv("secret_key")
+app.secret_key = os.environ.get("secret_key")
 gravatar = Gravatar(app,size=100,rating='g',default='retro',force_default=False,force_lower=False,use_ssl=False,base_url=None)
 
 
