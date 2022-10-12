@@ -243,4 +243,4 @@ def open_contact_page():
         return render_template("contact.html", message="Successfully sent your message.",logged_in=current_user.is_authenticated)
     return render_template("contact.html", message="Contact Akash!",logged_in=current_user.is_authenticated)
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run()
