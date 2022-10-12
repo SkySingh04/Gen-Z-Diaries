@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 #--------------------------------------------------Initialization------------------------------------------------------
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts2.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1")
 ckeditor = CKEditor(app)
 bootstrap = Bootstrap4(app)
 db = SQLAlchemy(app)
