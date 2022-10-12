@@ -23,8 +23,11 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Akash's Blogs</h1>
-                            <span class="subheading">A Collection Of Random Thoughts</span>
+                            <h1>Gen-Z Diaries</h1>
+                            <span class="subheading">A Collection Of Random Thoughts By Ones Among Us</span>
+                            {%if not logged_in:%}
+                            <span class="subheading">Please Register And Login To Create Posts And Comments</span>
+                            {%endif%}
                         </div>
                     </div>
                 </div>
