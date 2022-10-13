@@ -52,7 +52,7 @@
                     {% for comment in comments: %}
                         {%if comment.comment_post_id == post["id"]%}
                             <div class="row">
-                                <div class="col-lg-2 col-sm-4 mx-auto comment">
+                                <div class="col-lg-2 col-sm-2 mx-auto comment">
                                     <img src="{{ comment.commenter_email | gravatar }}" class="commenterImage"/>
                                 </div>
                                 <div class="col-lg-10 col-sm-8 mx-auto comment dark-container">
