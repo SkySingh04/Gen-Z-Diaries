@@ -52,15 +52,16 @@
                     {% for comment in comments: %}
                         {%if comment.comment_post_id == post["id"]%}
                             <div class="row">
-                                <div class="col-lg-2 col-sm-2 mx-auto comment">
-                                    <img src="{{ comment.commenter_email | gravatar }}" class="commenterImage"/>
-                                </div>
-                                <div class="col-lg-10 col-sm-8 mx-auto comment dark-container">
-                                    {{comment.text|safe}}
-                                </div>
-                                <div class="col-lg-8 col-md-10 mx-auto comment float-end">
-                                    <span class="date sub-text"><em>-{{comment.commenter_name}}</em></span><a href="{{url_for('delete_comment',num=comment.id)}}">✘</a>
-                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="col-lg-10 col-sm-8 mx-auto comment dark-container">
+                                            {{comment.text|safe}}
+                                        </div>
+                                        <div class="col-lg-8 col-md-10 mx-auto comment float-end">
+                                            <span class="date sub-text"><em>-{{comment.commenter_name}}</em></span><a href="{{url_for('delete_comment',num=comment.id)}}">✘</a>
+                                        </div>
+                                     </li>
+                                </ul>
                             </div>
                         {%endif%}
                     {% endfor %}
