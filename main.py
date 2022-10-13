@@ -138,7 +138,7 @@ def render_post(num):
         )
         db.session.add(new_comment)
         db.session.commit()
-    form.text.data=""
+    form.comment.data=""
     post=BlogPost.query.filter_by(id=x).first()
     comments=db.session.query(Comment).all()
     url=post.img_url
