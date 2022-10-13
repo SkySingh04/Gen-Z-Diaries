@@ -136,10 +136,9 @@ def render_post(num):
             commenter_email=current_user.email,
             comment_post_id=x
         )
-        form.text.data=""
         db.session.add(new_comment)
         db.session.commit()
-    
+    form.text.data=""
     post=BlogPost.query.filter_by(id=x).first()
     comments=db.session.query(Comment).all()
     url=post.img_url
