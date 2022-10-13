@@ -136,6 +136,7 @@ def render_post(num):
             commenter_email=current_user.email,
             comment_post_id=x
         )
+        form.text.data=""
         db.session.add(new_comment)
         db.session.commit()
     
