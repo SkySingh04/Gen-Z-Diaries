@@ -17,11 +17,13 @@ class RegisterUserForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(),Email()])
     password = StringField("Password", validators=[DataRequired()])
     submit = SubmitField("Register")
+    login=SubmitField("Already Registered? Login")
 
 class LoginUserForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(),Email()])
     password = StringField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
+    register= SubmitField("New User? Register")
 
 class DeleteForm(FlaskForm):
     email = StringField("Type 'OK' To Delete", validators=[DataRequired()])
