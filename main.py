@@ -187,7 +187,9 @@ def edit_post(num):
             post.body=edit_form.body.data
             db.session.commit()
             url=post.img_url
-            return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form)
+            first_post=db.session.query(BlogPost).order_by(BlogPost.id.desc()).first()
+            last_post=db.session.query(BlogPost).order_by(BlogPost.id).first()
+            return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,first_post=first_post,last_post=last_post)
     else:
         return abort(403)
     return render_template('createpost.html',form=edit_form,editer=True,logged_in=current_user.is_authenticated)
