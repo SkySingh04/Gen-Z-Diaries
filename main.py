@@ -198,10 +198,11 @@ def create_post():
         return redirect(url_for('login'))
         
     if form.validate_on_submit():
+        last_post=db.session.query(BlogPost).order_by(BlogPost.id.desc()).first()
         date = dt.today()
         x=(str(date).split()[0].split("-"))
         date_today=f"{x[2]}-{x[1]}-{x[0]}"
-        new_post=BlogPost(
+        new_post=BlogPost(id=last_post.id +1,
         body=form.body.data,
         title=form.title.data,
         subtitle=form.subtitle.data,
