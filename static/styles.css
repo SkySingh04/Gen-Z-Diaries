@@ -2691,6 +2691,13 @@ textarea.form-control-lg {
   padding-top: 2.125rem;
   padding-bottom: 0.625rem;
 }
+.admin-btn{
+  text-align: center;
+}
+.somemargin{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .form-floating > .form-control:-webkit-autofill {
   padding-top: 2.125rem;
   padding-bottom: 0.625rem;
