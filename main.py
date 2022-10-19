@@ -5,10 +5,9 @@ from flask_gravatar import Gravatar
 from flask_bootstrap import Bootstrap4
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
-import smtplib
 from datetime import datetime as dt
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_login import UserMixin, login_user, LoginManager,current_user, logout_user
 from forms import CreatePostForm,RegisterUserForm,LoginUserForm,DeleteForm,CommentsForm
 import os
 from dotenv import load_dotenv
@@ -24,7 +23,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 login_manager = LoginManager()
 login_manager.init_app(app)
 load_dotenv("C:/Users/ACA$H/Desktop/CONFIDENTIAL/EnvironmentVariables/.env")
-#Secret Things 
+# Secret Things 
 app.secret_key = os.environ.get("secret_key")
 gravatar = Gravatar(app,size=100,rating='g',default='retro',force_default=False,force_lower=False,use_ssl=False,base_url=None)
 
@@ -129,7 +128,7 @@ def render_post(num):
     form=CommentsForm()
     if form.validate_on_submit():
         if not current_user.is_authenticated:
-            return abort(403)
+            return redirect(url_for('login'))
         new_comment=Comment(
             text=form.comment.data,
             commenter_name=current_user.name,
@@ -150,7 +149,7 @@ def edit_post(num):
     form=CommentsForm()
     post=BlogPost.query.filter_by(id=x).first()
     if not current_user.is_authenticated:
-        return abort(403)
+        return redirect(url_for('login'))
     elif current_user.id==post.author_id or current_user.id==1:
         edit_form = CreatePostForm(
         title=post.title,
@@ -176,7 +175,7 @@ def edit_post(num):
 def create_post():
     form = CreatePostForm()
     if not current_user.is_authenticated:
-        return abort(403)
+        return redirect(url_for('login'))
         
     if form.validate_on_submit():
         date = dt.today()
@@ -226,13 +225,9 @@ def open_about_page():
 @app.route('/contact', methods=['GET', 'POST'])
 def open_contact_page():
     if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        phonenum =  request.form["phonenum"]
-        message = request.form["message"]
-        
-
         return render_template("contact.html", message="Successfully sent your message.",logged_in=current_user.is_authenticated)
     return render_template("contact.html", message="Contact Akash!",logged_in=current_user.is_authenticated)
 if __name__=="__main__":
     app.run()
+# if __name__=="__main__":
+#     app.run(debug=True)
