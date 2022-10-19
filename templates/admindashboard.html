@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog Website</title>
+        <link rel="icon" href="/static/assets/favicon-32x32.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('static/assets/img/admin-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Welcome Admin!</h1>
+                            <span class="subheading">Here Is All The Data You Need!</span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="justify-content-center">
+                <h1 class="subheading">BlogPosts:</h1>
+                <div class="col-md-8 col-lg-12 col-xl-7">
+                    <table class="table table-bordered border-light table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Author_ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Subtitle</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">URL</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in blog_data: %}    
+                          <tr>
+                            <th scope="row">{{item["id"]}}</th>
+                            <td>{{item["author_id"]}}</td>
+                            <td>{{item["title"]}}</td>
+                            <td>{{item["subtitle"]}}</td>
+                            <td>{{item["date"]}}</td>
+                            <td>{{item["author"]}}</td>
+                            <td>{{item["img_url"]}}</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                        <!-- Divider-->
+                        <hr class="my-4"/>
+                    
+                </div>   
+            </div>
+
+            <div class="justify-content-center">
+                <h1 class="subheading">Users:</h1>
+                <div class="col-md-8 col-lg-12 col-xl-7">
+                    <table class="table table-bordered border-light table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in user_data: %}    
+                          <tr>
+                            <th scope="row">{{item["id"]}}</th>
+                            <td>{{item["name"]}}</td>
+                            <td>{{item["email"]}}</td>
+                            <td>{{item["password"]}}</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                        <!-- Divider-->
+                        <hr class="my-4"/>
+                </div>   
+            </div>
+
+            <div class="justify-content-center">
+                <h1 class="subheading">Comments:</h1>
+                <div class="col-md-8 col-lg-12 col-xl-7">
+                    <table class="table table-bordered border-light table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">Comment Post ID</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Comment</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in comments_data: %}    
+                          <tr>
+                            <th scope="row">{{item["comment_post_id"]}}</th>
+                            <td>{{item["id"]}}</td>
+                            <td>{{item["commenter_name"]}}</td>
+                            <td>{{item["commenter_email"]}}</td>
+                            <td>{{item["text"]}}</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                        <!-- Divider-->
+                        <hr class="my-4"/>
+                </div>   
+            </div>
+
+        </div>
+        {% include 'footer.html' %}
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{url_for('static', filename='scripts.js')}}"></script>
+    </body>
+</html>
