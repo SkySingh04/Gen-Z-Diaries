@@ -59,18 +59,11 @@
                     
                     {% for comment in comments: %}
                         {%if comment.comment_post_id == post["id"]%}
-                            <div class="row">
-                                <ul>
-                                    <li>
-                                        <div class="col-lg-10 col-sm-8 mx-auto comment dark-container">
-                                            {{comment.text|safe}}
-                                        </div>
-                                        <div class="col-lg-8 col-md-10 mx-auto comment float-end">
-                                            <span class="date sub-text"><em>-{{comment.commenter_name}}</em></span><a href="{{url_for('delete_comment',num=comment.id)}}">✘</a>
-                                        </div>
-                                     </li>
-                                </ul>
-                            </div>
+                        <div class="container-fluid border border-white bg-dark text-light pt-2">
+                            <a href="{{url_for('delete_comment',num=comment.id)}}" class="text-danger">✘</a><span class="date sub-text border-white"><em>{{comment.commenter_name}} says:</em></span>
+                            <span class="pl-4">{{comment.text|safe}}</span>    
+                        </div>
+                        <hr class="my-4"/>
                         {%endif%}
                     {% endfor %}
                     </div>
