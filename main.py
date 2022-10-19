@@ -150,8 +150,9 @@ def render_post(num):
     post=BlogPost.query.filter_by(id=x).first()
     comments=db.session.query(Comment).all()
     first_post=db.session.query(BlogPost).order_by(BlogPost.id.desc()).first()
+    last_post=db.session.query(BlogPost).order_by(BlogPost.id).first()
     url=post.img_url
-    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments,first_post=first_post)
+    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments,first_post=first_post,last_post=last_post)
 
 @app.route("/post/<num>",methods=["GET","POST"])
 def next_post(num):
