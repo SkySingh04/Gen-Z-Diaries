@@ -67,10 +67,20 @@ def admin_only(f):
 #--------------------------------------------------Main Routes------------------------------------------------------
 @app.route("/")
 def home():
-#     db.create_all()
+    # db.create_all()
     data=db.session.query(BlogPost).order_by(BlogPost.id.desc())
     print(data)
     return render_template("index.html",blog_data=data,logged_in=current_user.is_authenticated)
+
+
+@app.route('/admin_dashboard')
+@admin_only
+def admin_page():
+    blog_data=db.session.query(BlogPost).order_by(BlogPost.id)
+    user_data=db.session.query(User).order_by(User.id)
+    comments_data=db.session.query(Comment).order_by(Comment.comment_post_id)
+    return render_template("admindashboard.html",blog_data=blog_data,user_data=user_data,comments_data=comments_data)
+
 
 @login_manager.user_loader
 def load_user(user_id):
