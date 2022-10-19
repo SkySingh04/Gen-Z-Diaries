@@ -78,41 +78,47 @@ def load_user(user_id):
 @app.route('/register',methods=["GET","POST"])
 def register():
     form = RegisterUserForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user:
-            flash('Username Already Exists.Please Login Instead')
-            return redirect(url_for('login')) 
+    if request.method == 'POST':
+        if form.login.data:  
+            return redirect(url_for('login'))
         else:
-            hashed_password= generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
-            new_user=User(
-                name=form.name.data,
-                email=form.email.data,
-                password=hashed_password
-            )
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user)
-            return redirect(url_for('login',logged_in=current_user.is_authenticated))
+            user = User.query.filter_by(email=form.email.data).first()
+            if user:
+                flash('Username Already Exists.Please Login Instead')
+                return redirect(url_for('login')) 
+            else:
+                hashed_password= generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
+                new_user=User(
+                    name=form.name.data,
+                    email=form.email.data,
+                    password=hashed_password
+                )
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user)
+                return redirect(url_for('login',logged_in=current_user.is_authenticated))
     return render_template("register.html",form=form)
 
 @app.route('/login',methods=["GET","POST"])
 def login():
     form=LoginUserForm()
-    if form.validate_on_submit():
-        email=form.email.data
-        password=form.password.data
-        user = User.query.filter_by(email=email).first()
-        if not user:
-            flash('Invalid Email')
-            return redirect(url_for('login'))
+    if request.method == 'POST':
+        if form.register.data:  
+            return redirect(url_for('register'))
         else:
-            if check_password_hash(user.password, password):
-                login_user(user)
-                return redirect(url_for('home'))
+            email=form.email.data
+            password=form.password.data
+            user = User.query.filter_by(email=email).first()
+            if not user:
+                flash('Invalid Email')
+                return redirect(url_for('login'))
             else:
-                flash('Invalid Password')
-                return redirect(url_for('login'))        
+                if check_password_hash(user.password, password):
+                    login_user(user)
+                    return redirect(url_for('home'))
+                else:
+                    flash('Invalid Password')
+                    return redirect(url_for('login'))        
     return render_template("login.html",form=form)
 
 
