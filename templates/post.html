@@ -39,8 +39,8 @@
         </header>
         <!-- Post Content-->
         <div class="clearfix">
-            <a class="btn btn-dark btn-outline-light float-start" href="{{url_for('previous_post',num=post['id']+1)}}"><-- Previous Post</a>
-            <a class="btn btn-dark btn-outline-light float-end" href="{{url_for('next_post',num=post['id']-1)}}">Next Post --></a>
+            <a class="btn btn-dark btn-outline-light float-start" href="{{url_for('previous_post',num=post['id'] +1)}}"><-- Previous Post</a>
+            <a class="btn btn-dark btn-outline-light float-end" href="{{url_for('next_post',num=post['id'] -1)}}">Next Post --></a>
         </div>
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
