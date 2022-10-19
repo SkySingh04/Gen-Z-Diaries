@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 #--------------------------------------------------Initialization------------------------------------------------------
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1")
-
 ckeditor = CKEditor(app)
 bootstrap = Bootstrap4(app)
 db = SQLAlchemy(app)
@@ -26,7 +25,6 @@ login_manager.init_app(app)
 load_dotenv("C:/Users/ACA$H/Desktop/CONFIDENTIAL/EnvironmentVariables/.env")
 # Secret Things 
 app.secret_key = os.environ.get("secret_key")
-
 gravatar = Gravatar(app,size=100,rating='g',default='retro',force_default=False,force_lower=False,use_ssl=False,base_url=None)
 
 
@@ -64,11 +62,14 @@ def admin_only(f):
             return abort(403)
         return f(*args, **kwargs)        
     return decorated_function
+
+
 #--------------------------------------------------Main Routes------------------------------------------------------
 @app.route("/")
 def home():
 #     db.create_all()
     data=db.session.query(BlogPost).order_by(BlogPost.id.desc())
+    print(data)
     return render_template("index.html",blog_data=data,logged_in=current_user.is_authenticated)
 
 @login_manager.user_loader
@@ -148,12 +149,14 @@ def render_post(num):
     form.comment.data=""
     post=BlogPost.query.filter_by(id=x).first()
     comments=db.session.query(Comment).all()
+    first_post=db.session.query(BlogPost).order_by(BlogPost.id.desc()).first()
     url=post.img_url
-    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments)
+    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments,first_post=first_post)
 
 @app.route("/post/<num>",methods=["GET","POST"])
 def next_post(num):
     pass
+
 
 @app.route("/post/<num>",methods=["GET","POST"])
 def previous_post(num):
