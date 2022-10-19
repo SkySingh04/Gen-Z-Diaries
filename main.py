@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 #--------------------------------------------------Initialization------------------------------------------------------
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1")
+
 ckeditor = CKEditor(app)
 bootstrap = Bootstrap4(app)
 db = SQLAlchemy(app)
@@ -25,6 +26,7 @@ login_manager.init_app(app)
 load_dotenv("C:/Users/ACA$H/Desktop/CONFIDENTIAL/EnvironmentVariables/.env")
 # Secret Things 
 app.secret_key = os.environ.get("secret_key")
+
 gravatar = Gravatar(app,size=100,rating='g',default='retro',force_default=False,force_lower=False,use_ssl=False,base_url=None)
 
 
@@ -156,6 +158,7 @@ def next_post(num):
 @app.route("/post/<num>",methods=["GET","POST"])
 def previous_post(num):
     pass
+
 
 @app.route("/editpost/?id=<num>",methods=["POST","GET"])
 def edit_post(num):
