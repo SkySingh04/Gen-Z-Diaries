@@ -149,6 +149,14 @@ def render_post(num):
     url=post.img_url
     return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments)
 
+@app.route("/post/<num>",methods=["GET","POST"])
+def next_post(num):
+    pass
+
+@app.route("/post/<num>",methods=["GET","POST"])
+def previous_post(num):
+    pass
+
 @app.route("/editpost/?id=<num>",methods=["POST","GET"])
 def edit_post(num):
     x=int(num)
