@@ -39,9 +39,13 @@
         </header>
         <!-- Post Content-->
         <div class="clearfix">
-            <a class="btn btn-dark btn-outline-light float-start" href="{{url_for('previous_post',num=post['id'] +1)}}"><-- Previous Post</a>
-            <a class="btn btn-dark btn-outline-light float-end" href="{{url_for('next_post',num=post['id'] -1)}}">Next Post --></a>
-        </div>
+            {%if post["id"]!=first_post["id"]:%}
+            <a class="btn btn-dark btn-outline-light float-start" href="{{url_for('previous_post',num=post['id']+1)}}"><-- Previous Post</a>
+            {%endif%}
+            {%if post["id"]!=1:%}
+                <a class="btn btn-dark btn-outline-light float-end" href="{{url_for('next_post',num=post['id']-1)}}">Next Post --></a>
+            {%endif%}
+            </div>
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
