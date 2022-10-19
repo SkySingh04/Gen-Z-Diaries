@@ -42,7 +42,7 @@
             {%if post["id"]!=first_post["id"]:%}
             <a class="btn btn-dark btn-outline-light float-start" href="{{url_for('previous_post',num=post['id']+1)}}"><-- Previous Post</a>
             {%endif%}
-            {%if post["id"]!=1:%}
+            {%if post["id"]!=last_post["id"]:%}
                 <a class="btn btn-dark btn-outline-light float-end" href="{{url_for('next_post',num=post['id']-1)}}">Next Post --></a>
             {%endif%}
             </div>
