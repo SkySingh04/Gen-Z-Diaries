@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager,current_user, logout_user
 from forms import CreatePostForm,RegisterUserForm,LoginUserForm,DeleteForm,CommentsForm
 import os
+import random
 from dotenv import load_dotenv
 
 
@@ -161,8 +162,15 @@ def render_post(num):
     comments=db.session.query(Comment).all()
     first_post=db.session.query(BlogPost).order_by(BlogPost.id.desc()).first()
     last_post=db.session.query(BlogPost).order_by(BlogPost.id).first()
+    list_of_posts=db.session.query(BlogPost).all()
+    list_of_posts.remove(post)
+    recommended_posts=[]
+    for i in range(3):
+        random_post=random.choice(list_of_posts)
+        recommended_posts.append(random_post)
+        list_of_posts.remove(random_post)
     url=post.img_url
-    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments,first_post=first_post,last_post=last_post)
+    return render_template("post.html",post=post,url=url,logged_in=current_user.is_authenticated,form=form,comments=comments,first_post=first_post,last_post=last_post,recommended_posts=recommended_posts)
 
 @app.route("/post/<num>",methods=["GET","POST"])
 def next_post(num):
