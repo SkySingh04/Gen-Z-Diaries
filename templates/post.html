@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Post</title>
+        <title>{{post["title"]}}</title>
         <link rel="icon" href="/static/assets/favicon-32x32.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -74,6 +74,25 @@
             </div>
             
         </article>
+        <section id="pricing" class="make-center make-padded border border-white bg-dark text-light">
+            <h2 class="section-heading make-padded">Recommended Posts</h2>
+            <div class="card-group cards text-dark">
+                {%for recommended_post in recommended_posts:%}   
+                    <div class="card">
+                        <div class="card-header">
+                        <h3>{{recommended_post["title"]}}</h3>
+                        </div>
+                        <div class="card-body">
+                        <p>{{recommended_post["subtitle"]}}</p>
+                        </div>
+                        <div class="card-footer">
+                        <a href="{{url_for('render_post',num=recommended_post['id'])}}" class="btn w-100 btn-outline-dark btn-lg">Visit</a>
+                        </div>
+                    </div>
+                {%endfor%}
+              </div>
+            </div>  
+          </section>
         {% include 'footer.html' %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
