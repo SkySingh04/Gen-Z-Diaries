@@ -5665,7 +5665,12 @@ textarea.form-control-lg {
   border-width: 0.5rem 0.5rem 0.5rem 0;
   border-right-color: #fff;
 }
-
+.make-center{
+  text-align: center;
+}
+.make-padded{
+  padding: 5% 15%;
+}
 .bs-popover-bottom > .popover-arrow, .bs-popover-auto[data-popper-placement^=bottom] > .popover-arrow {
   top: calc(-0.5rem - 1px);
 }
