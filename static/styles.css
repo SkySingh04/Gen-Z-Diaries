@@ -4483,8 +4483,10 @@ textarea.form-control-lg {
   padding: 1rem 1rem;
 }
 
+@media (min-width: 576px) {
 #recommendedpost{
   padding:0;
+}
 }
 .card-title {
   margin-bottom: 0.5rem;
